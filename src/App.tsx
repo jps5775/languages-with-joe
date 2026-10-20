@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import SignupForm from './SignupForm.tsx'
 
 function Mark({
@@ -12,10 +12,26 @@ function Mark({
 }
 
 export default function App() {
+  const [sent, setSent] = useState(false)
+
   useEffect(() => {
-    document.title =
-      'Free 7-day Language Speaking Blueprint | Languages with Joe'
-  }, [])
+    document.title = sent
+      ? 'Your Language Blueprint is on the way | Languages with Joe'
+      : 'Free 7-day Language Speaking Blueprint | Languages with Joe'
+  }, [sent])
+
+  if (sent) {
+    return (
+      <main className="mx-auto w-full max-w-[42rem] px-6 py-16 text-ink sm:py-24">
+        <h1 className="font-serif text-[clamp(2.35rem,8vw,4.15rem)] leading-[1.14] font-medium tracking-[-0.035em]">
+          Your Language Blueprint is on the way! 🎉
+        </h1>
+        <p className="mt-10 text-lg leading-8">
+          Check your email, click the button to verify your signup and you'll receive your free 7-day Language Speaking Blueprint straight to your inbox.
+        </p>
+      </main>
+    )
+  }
 
   return (
     <main className="mx-auto w-full max-w-[42rem] px-6 py-16 text-ink sm:py-24">
@@ -60,7 +76,7 @@ export default function App() {
         </p>
       </div>
 
-      <SignupForm />
+      <SignupForm onSent={() => setSent(true)} />
     </main>
   )
 }

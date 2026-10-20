@@ -3,7 +3,7 @@ import type { FormEvent } from 'react'
 
 type Status = 'idle' | 'submitting' | 'sent'
 
-export default function SignupForm() {
+export default function SignupForm({ onSent }: { onSent: () => void }) {
   const [status, setStatus] = useState<Status>('idle')
   const [error, setError] = useState('')
 
@@ -35,18 +35,11 @@ export default function SignupForm() {
       }
 
       setStatus('sent')
+      onSent()
     } catch {
       setStatus('idle')
       setError('Something went wrong. Please try again.')
     }
-  }
-
-  if (status === 'sent') {
-    return (
-      <p id="signup" className="mt-12 scroll-mt-24 text-lg leading-8" role="status">
-        Check your email and click the button to confirm your signup.
-      </p>
-    )
   }
 
   return (

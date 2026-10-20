@@ -54,12 +54,17 @@ export default async (req: Request) => {
   const sent = await resend.emails.send({
     from: 'Joe <joe@contact.languageswithjoe.com>',
     to: email,
-    subject: 'Confirm your email',
-    text: `Hi ${firstName}, confirm your email to get the free 7-day Language Speaking Blueprint: ${confirmUrl}`,
-    html: `<p>Hi ${escapeHtml(firstName)},</p>
-<p>Confirm your email to get the free 7-day Language Speaking Blueprint.</p>
-<p><a href="${confirmUrl}" style="display:inline-block;background:#17835A;color:#ffffff;padding:12px 18px;border-radius:8px;font-weight:700;text-decoration:none">Confirm my email</a></p>`,
-  })
+    subject: 'Confirm your email to get your Speaking Blueprint',
+    html: `<div style="font-family:Arial,Helvetica,sans-serif;text-align:left;line-height:1.6;color:#333333">
+  <p style="font-family:Arial,Helvetica,sans-serif;text-align:left;line-height:1.6;color:#333333;margin:0 0 16px">Hi ${escapeHtml(firstName)},</p>
+  <p style="font-family:Arial,Helvetica,sans-serif;text-align:left;line-height:1.6;color:#333333;margin:0 0 16px">Thanks for signing up for my free 7-day Language Speaking Blueprint.</p>
+  <p style="font-family:Arial,Helvetica,sans-serif;text-align:left;line-height:1.6;color:#333333;margin:0 0 16px">This is something I really wish I had when I was learning to speak in my languages and I'm confident you'll love it.</p>
+  <p style="font-family:Arial,Helvetica,sans-serif;text-align:left;line-height:1.6;color:#333333;margin:0 0 16px">Before I send it your way, just click the button below to confirm your email address and you'll be all set.</p>
+  <p style="font-family:Arial,Helvetica,sans-serif;text-align:left;line-height:1.6;color:#333333;margin:0 0 16px"><a href="${confirmUrl}" style="display:inline-block;background:#17835A;color:#ffffff;padding:12px 18px;border-radius:8px;font-weight:700;text-decoration:none">Confirm my email</a></p>
+  <p style="font-family:Arial,Helvetica,sans-serif;text-align:left;line-height:1.6;color:#333333;margin:0 0 16px">Talk soon,</p>
+  <p style="font-family:Arial,Helvetica,sans-serif;text-align:left;line-height:1.6;color:#333333;margin:0">Joe</p>
+</div>`,
+  });
 
   if (sent.error) {
     console.error('Resend confirmation email failed', sent.error.name)
