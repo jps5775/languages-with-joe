@@ -1,6 +1,6 @@
 import type { Config } from '@netlify/functions'
 import { Resend } from 'resend'
-import { createOptInToken } from './utils.ts'
+import { createOptInToken } from '../utils/utils.ts'
 
 type Payload = {
   firstName?: unknown
@@ -52,7 +52,7 @@ export default async (req: Request) => {
 
   const resend = new Resend(apiKey)
   const sent = await resend.emails.send({
-    from: 'Joe Sema <contact@languageswithjoe.com>',
+    from: 'Joe <joe@contact.languageswithjoe.com>',
     to: email,
     subject: 'Confirm your email',
     text: `Hi ${firstName}, confirm your email to get the free 7-day Language Speaking Blueprint: ${confirmUrl}`,

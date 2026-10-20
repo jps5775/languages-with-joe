@@ -1,6 +1,6 @@
 import type { Config } from '@netlify/functions'
 import { Resend } from 'resend'
-import { readOptInToken } from './utils.ts'
+import { readOptInToken } from '../utils/utils.ts'
 
 const alreadyExists = (statusCode: number | null, message: string) =>
   statusCode === 409 || /already exists/i.test(message)
